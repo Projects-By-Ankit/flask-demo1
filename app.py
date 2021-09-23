@@ -17,16 +17,15 @@ def hello_world():
         mycursor = conn.cursor()
         mycursor.execute("SELECT * FROM data_table WHERE user_name=%s", (request.args.get("name"),))
         data = mycursor.fetchall()
-
         for row in range(len(data)):
-            temp = data.__getitem__(row)
+            temp = data[row]
             dict1[row] = {"user_name": temp[0],
                           "site_name": temp[1],
                           "site_id_name": temp[2],
                           "site_password": temp[3],
                           "id_number": temp[4],
                           }
-            return make_response(jsonify(dict1))
+        return make_response(jsonify(dict1))
 
     except Exception as e:
         print(e)
